@@ -1,0 +1,74 @@
+;; The first three lines of this file were inserted by DrRacket. They record metadata
+;; about the language level of this file in a form that our tools can easily process.
+#reader(lib "htdp-beginner-reader.ss" "lang")((modname |CS 1102 Day 2 Templates|) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
+;; a school is a (make-school String String Natural)
+(define-struct school (name location founded))
+
+;;interp
+;; name is the school's name
+;; location city where its main campus is
+;; founded is the year founded
+
+;; a define struct:
+;; creates constructor
+;; creates functions to examine each structure
+
+;;(school? "WPI")
+;; false, type checks its operands
+
+
+;; Signature:
+;; School -> x (anything)
+(define (fn-for-school school)
+  (...
+   (school-name school)      ;String
+   (school-location school)  ;String
+   (school-founded school)   ;Natural
+  ))
+
+;; Stub
+;; (define (how-old school) 0)
+
+
+
+(define YEAR 2023)
+(define WPI (make-school "WPI" "Worcester" 1865))
+
+(check-expect (how-old WPI) (- YEAR (school-founded WPI)))
+
+;; School -> Natural
+(define (how-old school)
+  (- YEAR (school-founded WPI)))
+
+
+;___________________________________________________________________________
+
+;; DON'T DO
+;; ^^^^^^^^
+; student is a (make-student String String String Natural)
+;(define-struct student (name school-name school-location school-founded))
+
+;interp
+; name is student's name
+; school-name is the name of the school the student attends
+; school-location is the location of the school
+; school-founded is the year school was founded 
+
+#;
+(define (fn-for-student)
+  (...
+   (student-name student1) ;String
+   (student-school school) ;String
+   ))
+
+;______________________________________________________________________________
+
+
+
+(define-struct student (name school))
+
+(define (fn-for-student student)
+  (...
+   (student-name student) ;String
+   (fn-for-school (student-school student)))) ;; School
+

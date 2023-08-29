@@ -1,0 +1,115 @@
+;; The first three lines of this file were inserted by DrRacket. They record metadata
+;; about the language level of this file in a form that our tools can easily process.
+#reader(lib "htdp-beginner-reader.ss" "lang")((modname |Daniel Lang CS 1102 Assignment 0|) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
+(require 2htdp/image)
+
+;; Question 1:
+
+;; String -> String
+;; consumes a string and outputs the reverse of the string
+(check-expect (string-reverse "abc") "cba")
+(check-expect (string-reverse "daniel") "leinad")
+
+
+(define (string-reverse str) "")
+
+;; Natural -> Natural
+;; consumes a natural number and outputs the factorial of the number
+
+(check-expect (factorial 4) 24)
+(check-expect (factorial 5) 120)
+
+(define (factorial n) 0)
+
+;____________________________________________________
+
+;; Question 2:
+
+
+;; Natural -> Image
+;; consume a number and produce a solid, red, circle with a specified area
+;; (define (make-circle area) 0)
+
+(check-expect (make-circle 5)  (circle (sqrt(/ 5 pi)) "solid" "red"))
+(check-expect (make-circle 10)  (circle (sqrt(/ 10 pi)) "solid" "red"))
+
+;; (define (make-circle area)
+  ;;(...area))
+
+(define (make-circle area)
+    (circle (sqrt(/ area pi)) "solid" "red"))
+
+;_____________________________________________________
+
+;; Question 3:
+
+;; Number -> String
+;; Determine if an inputted integer is even or odd
+;(define (is-even? n) "")
+
+(check-expect (is-even? 2) "it's even")
+(check-expect (is-even? 7) "it's odd")
+
+;(define (is-even? n)
+  ;(...n))
+
+(define (is-even? n)
+  (if (even? n)
+  "it's even"
+  "it's odd"))
+
+;____________________________________________________
+
+;; Question 4:
+
+;; String String -> String
+;; Consumes two strings and concatenates them, placing the short string at the beginning
+;(define (sort-strings str1 str2) "")
+
+(check-expect (sort-strings "ab" "c") "cab")
+(check-expect (sort-strings "Worcester " "Polytechnic Institute") "Worcester Polytechnic Institute")
+(check-expect (sort-strings "house" "horse") "?")
+
+;(define (sort-strings str1 str2)
+  ;(...str1)
+  ;(...str2))
+
+(define (sort-strings str1 str2)
+  (cond
+    [(> (string-length str1) (string-length str2)) (string-append str2 str1)]
+    [(< (string-length str1) (string-length str2)) (string-append str1 str2)]
+    [else "?"]))
+
+;____________________________________________________
+
+;; Question 5:
+
+;; student is:
+;; - first-name
+;; - last-name
+;; - GPA
+;; interp. student information -first-name is student's first name,
+;; -last-name is student's last name, -GPA is student's GPA
+
+
+;; student -> String
+;; consumes a student's first name, last name, and gpa and
+;; outputs a string describing the student's academic standing
+
+;(define (academic-standing first-name last-name GPA) "")
+
+(check-expect (academic-standing "Joe" "Smith" 3.2) "Joe Smith is making satisfactory academic progress.")
+(check-expect (academic-standing "Jane" "Doe" 1.0) "Jane Doe is on academic probation.")
+(check-expect (academic-standing "Leo" "Tolstoy" 4.0) "Leo Tolstoy is on on the Dean’s list.")
+
+
+(define (academic-standing first-name last-name GPA)
+  (define str (string-append (string-append first-name " ") (string-append last-name " is ")))
+  (cond[(> GPA 3.5) (string-append str "making satisfactory academic progress")]
+       [(< GPA 2.0) (string-append str "on academic probation.")]
+       [else (string-append str "on academic probation.")]))
+
+
+ 
+  
+  
